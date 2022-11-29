@@ -7,6 +7,9 @@ import com.example.lucky_wheel.screens.FrontScreen
 import com.example.lucky_wheel.screens.GameScreen
 import com.example.lucky_wheel.screens.LoseScreen
 
+
+//THIS NAVIGATOR KOTLIN FILE HAS WAS MADE WITH INSPIRATION FROM THE YOUTUBE VIDEO:
+//https://www.youtube.com/watch?v=4gUeyNkGE3g&t=707s
 @Composable
 fun Navigation() {
     val navController = rememberNavController()

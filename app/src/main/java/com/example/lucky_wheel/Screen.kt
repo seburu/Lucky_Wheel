@@ -1,5 +1,8 @@
 package com.example.lucky_wheel
 
+
+//THIS SCREEN CLASS HAS WAS MADE WITH INSPIRATION FROM THE YOUTUBE VIDEO:
+//https://www.youtube.com/watch?v=4gUeyNkGE3g&t=707s
 sealed class Screen(val route : String){
 
     object FrontScreen : Screen("front_screen")
