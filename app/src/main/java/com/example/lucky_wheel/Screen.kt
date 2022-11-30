@@ -10,4 +10,14 @@ sealed class Screen(val route : String){
     object LoseScreen : Screen("lose_screen")
     object WinScreen : Screen("win_screen")
 
+    fun withArgs(vararg args : String): String{
+
+        return buildString {
+            append(route)
+            args.forEach { arg ->
+                append("/$arg")
+            }
+        }
+    }
+
 }

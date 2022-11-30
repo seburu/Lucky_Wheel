@@ -18,10 +18,6 @@ class GameData {
         val _guessed: MutableState<MutableList<Char>> = mutableStateOf(mutableListOf(' '))
 
         var guessed: State<List<Char>> = _guessed
-
-
-        val current = listOf<Char>()
-
     }
 
 

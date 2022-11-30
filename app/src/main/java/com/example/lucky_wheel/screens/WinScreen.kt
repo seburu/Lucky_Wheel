@@ -24,7 +24,7 @@ import com.example.lucky_wheel.Screen
 import com.example.lucky_wheel.ViewModel.ViewModel
 
 @Composable
-fun WinScreen(navController: NavController){
+fun WinScreen(navController: NavController,pricemoney: String){
     Column (verticalArrangement = Arrangement.Center,
         modifier = Modifier
             .fillMaxWidth()
@@ -49,6 +49,12 @@ fun WinScreen(navController: NavController){
 
             ) {
                 Text(text = "WINNER!!",
+                    fontSize = 50.sp,
+                    modifier = Modifier
+                        .padding(vertical = 20.dp)
+                        .align(CenterHorizontally)
+                )
+                Text(text = "You won $pricemoney$$!!",
                     fontSize = 50.sp,
                     modifier = Modifier
                         .padding(vertical = 20.dp)

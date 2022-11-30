@@ -1,8 +1,10 @@
 package com.example.lucky_wheel
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.lucky_wheel.screens.FrontScreen
 import com.example.lucky_wheel.screens.GameScreen
 import com.example.lucky_wheel.screens.LoseScreen
@@ -22,15 +24,22 @@ fun Navigation() {
             route = Screen.GameScreen.route){
             GameScreen(navController = navController)
         }
+        composable(
+            route = Screen.WinScreen.route+"/{pricemoney}",
+        arguments = listOf(navArgument("pricemoney"){
+            type = NavType.StringType
+            defaultValue = ""
+        }
+        )
+        ) {entry ->
+            entry.arguments?.getString("pricemoney")
+                ?.let { WinScreen(pricemoney = it,navController = navController) }
+        }
         composable(route = Screen.LoseScreen.route){
             LoseScreen(navController = navController)
         }
-        composable(route = Screen.WinScreen.route){
-            WinScreen(navController = navController)
-        }
         }
     }
-
 
 
 

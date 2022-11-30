@@ -24,6 +24,7 @@ import com.example.lucky_wheel.ViewModel.ViewModel
 @SuppressLint("UnrememberedMutableState", "MutableCollectionMutableState")
 @Composable
 fun GameScreen(navController: NavController){
+    var viewModel = ViewModel()
     Column (
     ){
         _guessed.value.clear()
@@ -69,15 +70,15 @@ fun GameScreen(navController: NavController){
                 Button(
                     onClick = {
                     if(newgame == 0){
-                        category = ViewModel.getCategory.GetCategory()
-                        word = ViewModel.getWord.GetWord(category)
-                        currentWord = ViewModel.initializeWord.InitializeWord(word)
+                        category = viewModel.GetCategory()
+                        word = viewModel.GetWord(category)
+                        currentWord = viewModel.InitializeWord(word)
                         newgame = 1
                     }
 
                     if(state == 0) {
                         state = 1
-                        add = ViewModel.spin.Spin()
+                        add = viewModel.Spin()
                         if (add == "0"){
                             price = bankrupt
                             balance = 0
@@ -114,7 +115,8 @@ fun GameScreen(navController: NavController){
                 )
                 Button(
                     onClick = {
-                        if(guessed.value.contains(guess.text.toCharArray()[0]) && guess.text.length == 1) {
+                        if((guessed.value.contains(guess.text.toCharArray()[0]) && guess.text.length == 1 ||
+                            guess.text.length > 1 && guess.text!=word) && state ==1) {
                             state = 0
                             lives -= 1
                             if(lives < 1){
@@ -126,19 +128,19 @@ fun GameScreen(navController: NavController){
                             if (guess.text.length > 1) {
                                 if (guess.text == word) {
                                     balance += add.toInt()*word.length
-                                    navController.navigate(Screen.WinScreen.route)
+                                    navController.navigate(Screen.WinScreen.withArgs(balance.toString()))
                                     payed = 1
                                 }
                             }
 
                             if (guess.text.length == 1) {
-                                ViewModel.addGuess.AddGuess(guess.text.toCharArray()[0])
-                                if(ViewModel.validate.Validate(guess.text.toCharArray()[0],word)>0){
-                                    balance+=add.toInt()* ViewModel.validate.Validate(guess.text.toCharArray()[0],word)
-                                    currentWord = ViewModel.displayWord.DisplayWord(word,guess.text.toCharArray()[0],currentWord)
+                                viewModel.AddGuess(guess.text.toCharArray()[0])
+                                if(viewModel.Validate(guess.text.toCharArray()[0],word)>0){
+                                    balance+=add.toInt()* viewModel.Validate(guess.text.toCharArray()[0],word)
+                                    currentWord = viewModel.DisplayWord(word,guess.text.toCharArray()[0],currentWord)
                                     payed = 1
                                     if(currentWord == word){
-                                        navController.navigate(Screen.WinScreen.route)
+                                        navController.navigate(Screen.WinScreen.withArgs(balance.toString()))
                                     }
                                 }
                                 if (payed == 0) {
